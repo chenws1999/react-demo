@@ -1,0 +1,86 @@
+.loadEffect{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    margin: 0 auto;
+    /* margin-top:100px; */
+}
+.loadEffect span{
+    display: inline-block;
+    width: 10%;
+    height: 10%;
+    border-radius: 50%;
+    background: grey;
+    position: absolute;
+    animation: load 1.04s ease infinite;
+}
+@keyframes load{
+    0%{
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100%{
+        transform: scale(.3);
+        opacity: 0.5;
+    }
+}
+.loadEffect span:nth-child(1){
+    left: 0;
+    top: 45%;
+    animation-delay:0.13s;
+}
+.loadEffect span:nth-child(2){
+    left: 15%;
+    top: 15%;
+    animation-delay:0.26s;
+}
+.loadEffect span:nth-child(3){
+    left: 45%;
+    top: 0;
+    animation-delay:0.39s;
+}
+.loadEffect span:nth-child(4){
+    top: 15%;
+    right: 15%;
+    animation-delay:0.52s;
+}
+.loadEffect span:nth-child(5){
+    right: 0;
+    top: 45%;
+    animation-delay:0.65s;
+}
+.loadEffect span:nth-child(6){
+    right: 15%;
+    bottom:15%;
+    animation-delay:0.78s;
+}
+.loadEffect span:nth-child(7){
+    bottom: 0;
+    left: 45%;
+    animation-delay:0.91s;
+}
+.loadEffect span:nth-child(8){
+    bottom: 15%;
+    left: 15%;
+    animation-delay:1.04s;
+}
+
+.disabled {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.disabled2 {
+    background-color: rgb(229, 229, 229);
+}
+
+.button {
+    border-style: none;
+    width: 100px;
+    height: 40px;
+    outline: none;
+    display: flex;
+    align-items: center;
+}
+.loading {
+    cursor: none;
+}
