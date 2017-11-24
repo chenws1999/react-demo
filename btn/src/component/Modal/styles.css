@@ -1,0 +1,129 @@
+
+.sui-full {
+    height: 100%;
+    margin: 0;
+    width: 100%
+}
+
+.sui-Modal {
+    background-color: rgba(0, 0, 0, .6);
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+
+
+.sui-Modal--verticallyCentered {
+    align-items: center
+}
+
+.sui-Modal-dialog {
+    background-color: #fff;
+    border: 0;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, .6);
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    max-height: 50%;
+    text-align: left;
+    vertical-align: middle;
+    white-space: normal
+}
+
+.sui-Slider-dialog {
+    background-color: #fff;
+    border: 0;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, .6);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    text-align: left;
+    vertical-align: middle;
+    white-space: normal;
+}
+
+@media screen and (max-width:767px) {
+    .sui-Modal-dialog{
+        max-height: 100%;
+    }
+    .sui-Modal-dialog--full {
+        height: 100%;
+        margin: 0;
+        width: 100%
+    }
+}
+
+@media screen and (min-width:768px) {
+    .sui-Modal-dialog {
+        max-width: 50%
+    }
+}
+
+.sui-Modal-header {
+    align-items: center;
+    color: inherit;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    padding: 15px 30px;
+    position: relative
+}
+
+.sui-Modal-close,
+.sui-Modal-header {
+    background-color: transparent;
+    display: flex
+}
+
+.sui-Modal-close {
+    border: 0;
+    cursor: pointer;
+    margin-left: 15px;
+    padding: 0
+}
+
+.sui-Modal-content {
+    /*-webkit-overflow-scrolling: touch;*/
+    border-bottom: 1px solid #ccc;
+    flex: 1 1 auto;
+    overflow: auto;
+    padding: 0px 30px;
+    position: relative
+}
+
+.sui-Modal-footer {
+    padding: 15px 30px
+}
+
+
+.sui-Modal--open {
+    display: flex;
+    justify-content: center;
+}
+
+.sui-Modal--verticallyCentered {
+    align-items: center;
+}
+
+@media screen and (max-width:767px) {
+    .sui-Modal-dialog{
+        max-height: 100%;
+    }
+    .sui-Modal-dialog--full {
+        height: 100%;
+        margin: 0;
+        width: 100%
+    }
+    .sui-Modal-dialog--mid {
+        height: 60%;
+        margin: 0;
+        width: 95%
+    }
+}

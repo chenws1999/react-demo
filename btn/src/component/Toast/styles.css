@@ -1,0 +1,55 @@
+.toastMessageInfo{
+    color: #FFF;
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background: #5588ee;
+}
+
+
+.toastMessageSuccess{
+    color: #FFF;
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #4CAF50;
+}
+
+.toastMessageError{
+    color: #FFF;
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #F44336;
+}
+
+.toastMessageWarning{
+    color: #FFF;
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #FF3D00;
+}
+
+.toastMessageLoading{
+    color: #FFF;
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #90A4AE;
+}
+
+.toastMessage{
+    font-size: 18px;
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
+    top: 0;
+    text-align: center;
+}
+

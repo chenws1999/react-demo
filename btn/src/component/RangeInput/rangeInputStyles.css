@@ -1,0 +1,129 @@
+:global(input[type=range]) {
+  -webkit-appearance: none;
+  margin: 18px 0;
+  width: 100%;
+}
+
+:global(input[type=range]):focus {
+  outline: none;
+}
+
+:global(input[type=range])::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #6597e4;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+:global(input[type=range])::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ff5600;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -14px;
+}
+
+:global(input[type=range]):focus::-webkit-slider-runnable-track {
+  background: #6597e4;
+}
+
+:global(input[type=range])::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #6597e4;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+:global(input[type=range])::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ff5600;
+  cursor: pointer;
+}
+
+:global(input[type=range])::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+
+:global(input[type=range])::-ms-fill-lower {
+  background: #6597e4;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+:global(input[type=range])::-ms-fill-upper {
+  background: #6597e4;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+
+:global(input[type=range])::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ff5600;
+  cursor: pointer;
+}
+
+:global(input[type=range]):focus::-ms-fill-lower {
+  background: #6597e4;
+}
+
+:global(input[type=range]):focus::-ms-fill-upper {
+  background: #6597e4;
+}
+
+.CPIInputRange{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.PIColorRedFont {
+  color: #EA4646;
+  font-size: 14px;
+}
+
+.CPIInputRangeWrap {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.CPIblueWidth {
+  color: #0099FF;
+  font-size: 14px;
+  width: 10%;
+  text-align: center;
+}

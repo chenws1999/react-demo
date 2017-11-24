@@ -1,0 +1,68 @@
+.btn {
+    background-color: #5588ee;
+}
+
+.btn1 {
+    padding: 0 14px;
+    text-align: center;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 1px;
+    -webkit-box-shadow: #CACACA 0px 1px 4px;
+    -moz-box-shadow: #CACACA 0px 1px 4px;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+    transition: all 150ms linear;
+}
+
+.btn2 {
+    padding: 0 14px;
+    text-align: center;
+    transition: all 150ms linear;
+}
+
+.span1 {
+    position: relative;
+    opacity: 1;
+    font-size: 14px;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0px;
+    padding-left: 16px;
+    padding-right: 16px;
+    color: #fff;
+    -webkit-user-select: none;
+}
+
+.basic {
+    cursor: pointer;
+    box-sizing: border-box;
+    height: 38px;
+    display: inline-block;
+}
+
+
+.flatBtn{
+    cursor: pointer;
+}
+
+.flatBtn:hover{
+    color: #26c6da;
+}
+
+.none:hover{
+    color: #5588ee;
+}
+
+.handleBtn {
+    width: 135px;
+    height: 35px;
+    color: #3791f6;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}

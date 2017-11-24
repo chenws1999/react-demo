@@ -1,0 +1,217 @@
+
+.countButton {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 24%;
+  height: 100%;
+  background: #FFF;
+  color: #6691FF;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  // z-index: 9;
+  border:none;
+  user-select:none;
+}
+
+.count_btn_input {
+  height: 30px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  // justify-content: center;
+  align-items: center;
+  .title {
+    color: rgb(144, 148, 149);
+    // text-align: center;
+    // align-self: flex-start;
+    height: 100%;
+    width: 33.33%;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    // margin-right: 5px;
+  }
+  .counter {
+    height: 100%;
+    width: 66.67%;
+    display: flex;
+    // justify-content: space-around;
+    // width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #2783eb;
+    .leftIcon {
+      @extend .countButton;
+      border-right: 1px solid #2783eb;
+      padding-bottom: 10px;
+    }
+    .input {
+      width: 52%;
+      outline: none;
+      box-sizing: border-box;
+      display: inline-block;
+      height: 100%;
+      font-size: 1.5rem;
+      border: none;
+      text-align: center;
+    }
+    .rightIcon {
+      @extend .countButton;
+      border-left: 1px solid #2783eb;
+    }
+  }
+}
+
+.baseInputNone {
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 44px;
+  font-size: 20px;
+  border: 1px solid #2783eb;
+  text-align: center;
+}
+
+.inputTextWidth {
+  width: 23.3333%;
+  margin: 10px 5%;
+}
+
+.fontChange {
+  font-family: 'PingFang SC Regular';
+  font-size: 14px;
+}
+
+.baseIconLeft:hover,
+.baseIconRight:hover,
+.baseIconLeftInput:hover,
+.baseIconRightInput:hover {
+  background: #6691FF;
+  color: #FFF;
+}
+
+
+/******** vertical **********/
+.countButtonV {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 20%;
+  height: 100%;
+  background: #FFF;
+  color: #6691FF;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  // z-index: 9;
+  border:none;
+  user-select:none;
+}
+
+.count_btn_inputV {
+  height: 60px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  .titleV {
+    color: rgb(144, 148, 149);
+    // text-align: center;
+    // align-self: flex-start;
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    display: flex;
+    // align-items: center;
+    // margin-right: 5px;
+  }
+  .counterV {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    // justify-content: space-around;
+    // width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #2783eb;
+    .leftIconV {
+      @extend .countButtonV;
+      border-right: 1px solid #2783eb;
+      padding-bottom: 10px;
+    }
+    .inputV {
+      width: 60%;
+      outline: none;
+      box-sizing: border-box;
+      display: inline-block;
+      height: 100%;
+      font-size: 1.5rem;
+      border: none;
+      text-align: center;
+    }
+    .rightIconV {
+      @extend .countButtonV;
+      border-left: 1px solid #2783eb;
+    }
+  }
+
+}
+/******************/
+
+@media screen and (max-width: 450px) {
+  .baseIconLeftInput {
+    width: 50px;
+  }
+
+  .baseIconRightInput {
+    width: 50px;
+  }
+
+  .PIUserInput {
+    width: 90%;
+  }
+
+  .baseInputInput {
+    width: 100%;
+  }
+
+  .baseIconRightInput {
+    width: 50px;
+  }
+
+  .baseInput {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .inputTextWidth {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .fontChange {
+    font-size: 14px;
+    margin: 15px 0 15px 0;
+  }
+
+  .count_btn_input .title{
+    width: 50%;
+  }
+  
+  .count_btn_input .counter{
+    width: 50%;
+  }
+}
+
+
+

@@ -1,0 +1,85 @@
+
+@media screen and (max-width: 979px){
+    .tableContainer{
+        padding: 12px;
+    }
+    .tableHead{
+        margin: 10px 0px;
+    }
+    .tableRow{
+        margin: 10px 0px;
+    }
+}
+@media screen and (max-width: 767px){
+    .tableContainer{
+        padding: 8px;
+    }
+    .tableHead{
+        margin: 6px 0px;
+    }
+    .tableRow{
+        margin: 6px 0px;
+    }
+}
+@media screen and (max-width: 480px){
+    .tableContainer{
+        padding: 4px;
+    }
+    .tableHead{
+        margin: 2px 0px;
+    }
+    .tableRow{
+        margin: 2px 0px;
+    }
+}
+
+/************************************/
+/**/
+.tableContainer{
+    /*padding 在 @media中设置*/
+    padding: 12px;
+}
+
+.tableHeader{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-top: 1px solid #3F3F3F;  /*todo 可设置*/
+    border-bottom: 1px solid #3F3F3F;  /*todo 可设置*/
+    border-left: 1px solid #3F3F3F;  /*todo 可设置*/
+    /*height 和 font 在 @media中设置*/
+    margin: 10px 0px;
+}
+
+.tableHeadItem{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border-right: 1px solid #3F3F3F;  /*todo 可设置*/
+    font-weight: bolder;
+    /*height 和 font 在 @media中设置*/
+}
+
+.tableRow{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    border: 1px solid #3F3F3F;  /*todo 可设置*/
+    /*height font margin 在 @media中设置*/
+    margin: 10px 0px;
+}
+
+.tableRowItem{
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    /*height 和 font margin 在 @media中设置*/
+}

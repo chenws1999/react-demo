@@ -1,0 +1,36 @@
+.textInput{
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 1px #9E9E9E;
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+    margin: 8px 0 8px;
+    transition: all ease .5s;
+}
+
+.textNoLine{
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    display: inline-block;
+    flex:1;
+}
+
+
+.textInput:focus{
+    border-bottom: solid 1px #5588ee;
+}
+
+.textArea{
+    outline: none;
+    width: 100%;
+    border-radius: 1px;
+    border-color: rgb(238, 238, 238);
+    border-width: 1px;
+    display: inline-block;
+}

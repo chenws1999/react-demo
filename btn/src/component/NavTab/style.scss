@@ -1,0 +1,45 @@
+.nav_link_container {
+  width: 100%;
+  display: flex;
+  padding: 0 0;
+  height: 100%;
+  background-color: #fff;
+  a {
+    cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
+    flex: 1;
+    color: rgb(102, 102, 102);
+    transition: color 0.2s linear;
+    text-decoration: none;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    .icon_left {
+      width: 2.5rem;
+      height: 2.5rem;
+      align-self: center;
+    }
+  }
+  .active {
+    color: rgb(85, 136, 238);
+  }
+  .active_underline{
+    color: rgb(85, 136, 238);
+    border-bottom: #5588ee 4px solid;
+  }
+}
+
+@media (max-width: 760px) {
+  .nav_link_container {
+    a {
+      font-size: 1.2rem;
+      .icon_left {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+}

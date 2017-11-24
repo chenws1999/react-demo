@@ -1,0 +1,44 @@
+.RightInput {
+  height: 30px;
+  width: 124px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid darkblue;
+}
+.plusMinusBtn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 30px;
+  height: 100%;
+  color: #333;
+  background: #FFF;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.V8input {
+  width: 64px;
+  outline: none;
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.LeftBtn {
+  @extend .plusMinusBtn;
+  border-right: 1px solid darkblue;
+}
+.RightBtn {
+  @extend .plusMinusBtn;
+  border-left: 1px solid darkblue;
+}

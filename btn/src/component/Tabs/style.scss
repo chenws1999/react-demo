@@ -1,0 +1,45 @@
+.tab_title_container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  margin: 20px 0 20px 0;
+  .tab_title {
+    flex: 1;
+    margin-right: 2px;
+    background-color: #fff;
+    color: #2E87FF;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border: 1px solid #2E87FF;
+    .title {
+      transition: color 0.2s linear;
+      font-size: 16px;
+      display: inline-block;
+      line-height: 35px;
+      overflow: hidden;
+    }
+  }
+  .title_active {
+    background-color: #2E87FF;
+    color: #fff;
+
+  }
+
+  .tab_title:active {
+    background: #2E87FF;
+    color: #fff;
+    border: 1px solid #2E87FF
+  }
+}
+
+.tab_content_items {
+  .tab_item {
+    display: none;
+  }
+  .item_active {
+    display: block;
+  }
+}
