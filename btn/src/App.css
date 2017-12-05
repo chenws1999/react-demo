@@ -26,3 +26,22 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.flex {
+  display: flex;
+  width: 100px;
+  flex-wrap: wrap;
+}
+
+.div-item {
+  width: 50%;
+  flex-grow: 0;
+  word-wrap: break-word;
+  /* flex-shrink: 1; */
+  /* overflow: hidden; */
+}
+
+.span-item {
+  width: 300px;
+  flex-shrink: 1;
+}

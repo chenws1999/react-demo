@@ -1,0 +1,25 @@
+.acceptBtnItem {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    span {
+        display: inline-block;
+    }
+    .label {
+        // width: 70%;
+        word-wrap:break-word;
+        margin: 10px auto;
+    }
+    .buttonItems {
+        display: flex;
+        flex-shrink: 0;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+}
+
+.no_label {
+    flex-grow: 1
+}

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import style from './style.css'
 
 export default class RaisedBtn extends React.Component {
-    static defaultProps = {
+    static defaultProps = { 
         backgroundColor: '#2780F7',
         borderBottom: 'initial',
         border: 'none',

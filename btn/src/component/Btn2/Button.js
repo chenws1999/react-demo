@@ -33,7 +33,7 @@ class Button extends React.Component {
             style: null,
             disabledClass: null,
             once: false,
-            type: 0 //两种初始化风格
+            type: 0 //初始化风格
         }, props);
         let flag= [0, 1, 2].some(item => { // 判断类型参数是否在有效范围内
             if (this.allProps.type === item)
@@ -50,7 +50,7 @@ class Button extends React.Component {
     render () {
         let className = bind('button',('button-style' +this.allProps.type),
             {'btn-disabled': this.state.disabled && !this.allProps.disabledClass,
-                 'loading': this.state.loading}, 
+                 'btn-loading': this.state.loading}, 
             this.allProps.className, this.allProps.disabledClass)
         let loadingContent = 
             <div className="spinner">
@@ -92,6 +92,7 @@ class Button extends React.Component {
     }
     handleClick (e) {
         let res = this.allProps.onClick(e);
+        console.log(res);
         if (res instanceof Promise) {
             this.setState({
                 loading: true

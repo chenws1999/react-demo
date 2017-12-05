@@ -3,61 +3,37 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './style.css';
 /*
-   type: PropTypes.number, //总共有四种类型可选 分别为0,1,2,3
-    style: PropTypes.object //可以传入 width height之类来控制组件的大小
+props: 
+  size: 控制大小，可选值有 'large'(默认),'small', 'medium'
 */
-export default function EffectLoad({type = 0, style = {}}) {
-
-    switch (type) {
-        case 1: 
-            return (
-                <div className="loading" style={style}>
-                    <div class="loading1">
-                        <span></span>
-                    </div>
-                </div>
-            )
-        case 2:
-            return (
-                <div className="loading" style={style}>
-                    <div class="loading2">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            )
-        case 3: 
-            return (
-                <div className="loading" style={style}>
-                    <div className="loading3">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                    </div>
-                </div>
-            )
-        default : 
-            return (
-                <div className="loading loading0" style={style}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            )
+const loadingSize = [
+    {
+        large: {
+            width: '200px',
+            height: '20px'
+        },
+        medium: {
+            width: '120px',
+            height: '12px'
+        },
+        small: {
+            width: '80px',
+            height: '8px'
+        }
     }
+]
+export default function EffectLoad({size = 'large'}) {
+        return (
+            <div className="loading loading1" style={loadingSize[0][size] || loadingSize[0]['large']}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        )
 }
 
 EffectLoad.proptypes = {
-    type: PropTypes.number,
-    style: PropTypes.object
+    size: PropTypes.string
 }
