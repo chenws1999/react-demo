@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import RaisedBtn from './RaisedBtn/RaisedBtn.js';
+// import RaisedBtn from './RaisedBtn/RaisedBtn.js';
 // import Button from './component/Btn2/Button';
-import './test.css';
-import BtnTabs from './component/BtnTabs/BtnTabs';
-import Checkbox, { CheckBoxGroup } from './component/CheckBox/index';
-import Input from './component/Input/Input';
-import LoadMore from './LoadMore/LoadMore';
-import CountBtnInput from './component/CountBtnInput/CountBtnInput'
-import EffectLoad from './component/EffectLoad/index';
-import Table from './component/Table/Table';
-import Box from './component/Select/Box';
-import Menu from './component/Select/Menu';
-import Select from './component/Select/Select';
-import Options from './component/Select/Option'
+// import './test.css';
+// import BtnTabs from './component/BtnTabs/BtnTabs';
+// import Checkbox, { CheckBoxGroup } from './component/CheckBox/index';
+// import Input from './component/Input/Input';
+// import LoadMore from './LoadMore/LoadMore';
+// import CountBtnInput from './component/CountBtnInput/CountBtnInput'
+// import EffectLoad from './component/EffectLoad/index';
+// import Table from './component/Table/Table';
+// import Box from './component/Select/Box';
+// import Menu from './component/Select/Menu';
+// import Select from './component/Select/Select';
+// import Options from './component/Select/Option'
 import Radio, { RadioGroup } from './backup/Radio/index';
-import Button from './backup/Btn2/Button';
-import AcceptBtn, { AcceptBtnItem } from './acceptBtn/index';
+// import Button from './backup/Btn2/Button';
+// import AcceptBtn, { AcceptBtnItem } from './acceptBtn/index';
 
-import IssuesUpload from './issues';
+// import IssuesUpload from './issues';
 function res() {
   return new Promise(res => {
     setTimeout(_ => {

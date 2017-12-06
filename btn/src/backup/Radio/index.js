@@ -16,10 +16,15 @@ export class RadioGroup extends Component {
         this.state = {
             value: this.props.defaultValue,
             isFirstRender: true,
-            eleWidth: 0
+            eleWidth: 0,
+            labelWidth: 0
         };
         this.handleOnchange = this.handleOnchange.bind(this);
         this.handleRef = this.handleRef.bind(this);
+        this.handleLabelRef = this.handleLabelRef.bind(this);
+    }
+    componentDidMount () {
+        // console.log(this.refs[]);
     }
     componentWillReceiveProps (nextProps) {
         if (this.state.value !== nextProps.value);
@@ -33,19 +38,29 @@ export class RadioGroup extends Component {
         }
     }
     handleParentRef (e) {
+        console.log('parent ref', e)
         if (!this.state.isFirstRender)
             return;
         console.log(e.clientWidth, this.childWidth)
         this.setState({
             isFirstRender: false,
-            eleWidth: e.clientWidth > this.childWidth ? this.childWidth : e.clientWidth
+            eleWidth: e.clientWidth > this.childWidth ? this.childWidth : e.clientWidth,
+            labelWidth: e.clientWidth > this.childWidth ? this.childLabelWidth : Math.floor(this.childLabelWidth - this.childWidth + e.clientWidth)
         })
     }
     handleRef (element) {
+        console.log('child ref', element)
         if (!this.state.isFirstRender)
             return;
-            console.log('child')
-        this.childWidth = element.scrollWidth;
+            console.log('child', element.scrollWidth, element.clientWidth)
+        this.childWidth = element.scrollWidth + 1;
+    }
+    handleLabelRef (ele) {
+        console.log('label ref', ele)
+        if (!this.state.isFirstRender)
+            return;
+        console.log('label ref', ele);
+        this.childLabelWidth = ele.scrollWidth;
     }
     firstRender () {
         let maxLengthChild = '',
@@ -60,6 +75,7 @@ export class RadioGroup extends Component {
         console.log(maxLengthChild, 'max-child')
         return React.cloneElement(maxLengthChild, {
             childRef: this.handleRef,
+            labelRef: this.handleLabelRef,
             key: maxLengthChild.props.key || maxLengthChild.props.value
         });
     }
@@ -72,9 +88,13 @@ export class RadioGroup extends Component {
                 let replaceProps = {name: this.props.name};
                     replaceProps.onClick = this.handleOnchange;
                     replaceProps.key = item.props.key || item.props.value;
-                    item.props.style && (replaceProps.style = Object.assign({}, item.props.style, {
+                    replaceProps.style = Object.assign({}, item.props.style, {
                         width: this.state.eleWidth
-                    }))
+                    })
+                    replaceProps.labelStyle = Object.assign({}, item.props.labelStyle, {
+                        width: this.state.labelWidth 
+                    })
+                    console.log(replaceProps, this.state.labelWidth);
                 if (item.props.value !== this.state.value) {
                     replaceProps.defaultChecked = false;
                     replaceProps.checked = false;
@@ -85,7 +105,7 @@ export class RadioGroup extends Component {
                 return React.cloneElement(item, replaceProps)
             });
         return (
-            <div ref={this.handleParentRef.bind(this)} style={this.props.style} className={bind('RadioGroup', this.props.layout === 'vertical' ? 'RadioGroup-vertical' : 'RadioGroup-level')}>
+            <div ref={this.state.isFirstRender && this.handleParentRef.bind(this)} style={this.props.style} className={bind('RadioGroup', this.props.layout === 'vertical' ? 'RadioGroup-vertical' : 'RadioGroup-level')}>
                 {childs}
             </div>
         )
@@ -103,7 +123,8 @@ export default class Radio extends Component {
         defaultChecked:  false,
         disabled: false,
         onClick: _ => {},
-        style: {}
+        style: {},
+        labelStyle: {}
     }
     constructor (props) {
         super(props);
@@ -130,7 +151,7 @@ export default class Radio extends Component {
                 <label className={classname}>
                     <input id={randomId} type="radio" value={this.props.value} onClick={this.handleonClick} name={this.props.name}/>
                 </label>
-                <label className="label" htmlFor={randomId}>{this.props.label}</label>
+                    <label className="label" ref={this.props.labelRef} style={this.props.labelStyle}  htmlFor={randomId}>{this.props.label}</label>
             </span>
         )
     }

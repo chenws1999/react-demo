@@ -54,20 +54,23 @@
 
 .Radio-container{
     display: inline-block;
+    box-sizing: border-box;
+    white-space: nowrap;
+    
 }
 .Radio-container > .label {
     display: inline-block;
-    max-width: 70%;
     word-wrap: break-word;
+    white-space: normal;
 }
 .RadioGroup-level > .Radio-container + .Radio-container {
-    margin-left: 15px;
+    /* margin-left: 15px; */
 }
 .RadioGroup {
     display: flex;
-    width: 30%;
+    width: 40%;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
