@@ -35,7 +35,10 @@ function click() {
 let labels = [
   'lllllllllllllllllllllllllllllllllllllllllllll',
   'sssssssssssssss',
-  'teswss'
+  'teswss',
+  'llllllllllllllllllllllllllllll',
+  'sds',
+  'sdfsadfsdf'
 ];
 
 let radios = []
@@ -51,7 +54,8 @@ class App extends Component {
       checked: true,
       value: "",
       disabled: false,
-      once: false
+      once: false,
+      width: '10%'
     }
     this.handleCheck = this.handleCheck.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -74,7 +78,9 @@ class App extends Component {
   handleChange(e, value) {
     console.log(value);
     this.setState({
-      value: value
+      value: value,
+      width: '40%'
+      
     });
   }
   render() {
@@ -153,7 +159,7 @@ class App extends Component {
       //   </p>
       // </div>
       <div className="App">
-              <RadioGroup value={this.state.value} onChange={this.handleChange} defaultValue="test2" layout="">
+              <RadioGroup style={{width: this.state.width}}value={this.state.value} onChange={this.handleChange} defaultValue="test2" layout="">
               {radios}
          </RadioGroup>
          <div className="flext">

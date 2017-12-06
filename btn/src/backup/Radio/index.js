@@ -22,9 +22,12 @@ export class RadioGroup extends Component {
         this.handleOnchange = this.handleOnchange.bind(this);
         this.handleRef = this.handleRef.bind(this);
         this.handleLabelRef = this.handleLabelRef.bind(this);
+        this.handleParentRef = this.handleParentRef.bind(this);
     }
     componentDidMount () {
         // console.log(this.refs[]);
+    }
+    componentDidUpdate () {
     }
     componentWillReceiveProps (nextProps) {
         if (this.state.value !== nextProps.value);
@@ -39,9 +42,23 @@ export class RadioGroup extends Component {
     }
     handleParentRef (e) {
         console.log('parent ref', e)
-        if (!this.state.isFirstRender)
+        // if (e && !this.state.isFirstRender && e.clientWidth !== this.clientWidth) {
+        //     this.clientWidth = e.clientWidth;
+        //     this.setState({
+        //         isFirstRender: true
+        //     })
+        //     return;
+        // }
+        if (!this.state.isFirstRender) {
+            if (e && e.clientWidth !== this.clientWidth) {
+                isFirstRender: true
+            }
+            this.clientWidth = e.clientWidth;
             return;
+        }
         console.log(e.clientWidth, this.childWidth)
+        this.clientWidth = e.clientWidth;
+        this.parentNode = e;
         this.setState({
             isFirstRender: false,
             eleWidth: e.clientWidth > this.childWidth ? this.childWidth : e.clientWidth,
@@ -94,7 +111,6 @@ export class RadioGroup extends Component {
                     replaceProps.labelStyle = Object.assign({}, item.props.labelStyle, {
                         width: this.state.labelWidth 
                     })
-                    console.log(replaceProps, this.state.labelWidth);
                 if (item.props.value !== this.state.value) {
                     replaceProps.defaultChecked = false;
                     replaceProps.checked = false;
@@ -105,7 +121,7 @@ export class RadioGroup extends Component {
                 return React.cloneElement(item, replaceProps)
             });
         return (
-            <div ref={this.state.isFirstRender && this.handleParentRef.bind(this)} style={this.props.style} className={bind('RadioGroup', this.props.layout === 'vertical' ? 'RadioGroup-vertical' : 'RadioGroup-level')}>
+            <div ref={this.handleParentRef} style={this.props.style} className={bind('RadioGroup', this.props.layout === 'vertical' ? 'RadioGroup-vertical' : 'RadioGroup-level')}>
                 {childs}
             </div>
         )
