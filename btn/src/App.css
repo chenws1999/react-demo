@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -44,4 +43,12 @@
 .span-item {
   width: 300px;
   flex-shrink: 1;
+}
+
+.flext {
+  border: 1px solid red;
+  width: 50px; 
+}
+.flext > span {
+  word-wrap: break-word;
 }

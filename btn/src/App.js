@@ -15,7 +15,7 @@ import Box from './component/Select/Box';
 import Menu from './component/Select/Menu';
 import Select from './component/Select/Select';
 import Options from './component/Select/Option'
-import Radio, { RadioGroup } from './component/Radio/index';
+import Radio, { RadioGroup } from './backup/Radio/index';
 import Button from './backup/Btn2/Button';
 import AcceptBtn, { AcceptBtnItem } from './acceptBtn/index';
 
@@ -32,7 +32,18 @@ function click() {
   console.log('click');
 }
 
+let labels = [
+  'lllllllllllllllllllllllllllllllllllllllllllll',
+  'sssssssssssssss',
+  'teswss'
+];
 
+let radios = []
+labels.forEach(item => {
+  radios.push((
+        <Radio label={item} style={{ color: '#5588ee' }} defaultChecked value={item} />
+  ))
+})
 class App extends Component {
   constructor() {
     super(arguments);
@@ -142,26 +153,35 @@ class App extends Component {
       //   </p>
       // </div>
       <div className="App">
-        <div id="container">
-        <canvas id="canvas" style={{
-          width: '700px',
-          height: '500px'
-        }}>
-        </canvas>
-        </div>
-        
-        <div id="test">
-           <CheckBoxGroup>
-           <Checkbox value="sss" onChange={this.handleCheck} label="ttest" checked={true} />
-           <Checkbox value="test2" onChange={this.handleCheck} label="success" checked={false} />
-         </CheckBoxGroup>
-           <AcceptBtn label="te">
-           <AcceptBtnItem label="testsssssssssssssssssssss"  style={{width: '200px'}} onClick={click} />
-           {/* <AcceptBtnItem label="test2"/> */}
-         </AcceptBtn>
-        </div>
-        <IssuesUpload/>
+              <RadioGroup value={this.state.value} onChange={this.handleChange} defaultValue="test2" layout="">
+              {radios}
+         </RadioGroup>
+         <div className="flext">
+              <span>sdfasdfasdfasfasdffasdfas</span>
+           </div>
       </div>
+      // <div className="App">
+      //   <div style={{height: '40px'}}></div>
+      //   <div id="container" style={{marginTop: '20px'}}>
+      //   <canvas id="canvas" style={{
+      //     width: '700px',
+      //     height: '500px'
+      //   }}>
+      //   </canvas>
+      //   </div>
+        
+      //   <div id="test">
+      //      <CheckBoxGroup>
+      //      <Checkbox value="sss" onChange={this.handleCheck} label="ttest" checked={true} />
+      //      <Checkbox value="test2" onChange={this.handleCheck} label="success" checked={false} />
+      //    </CheckBoxGroup>
+      //      <AcceptBtn label="te">
+      //      <AcceptBtnItem label="testsssssssssssssssssssss"  style={{width: '200px'}} onClick={click} />
+      //      {/* <AcceptBtnItem label="test2"/> */}
+      //    </AcceptBtn>
+      //   </div>
+      //   <IssuesUpload/>
+      //  </div>
     );
   }
 }

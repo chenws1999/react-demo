@@ -3,17 +3,22 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 let x = 0, y = 0,
+    lastX = -1, lastY = -1,
     canvas, ctx,
     inner = false,
     position,
     keydown = false, 
-    flag = false
+    flag = false,
+    lineWidth = 5
 function registerListener () {
     flag = true;    
-
+    console.log('flag to true')
 }
 function removeListener () {
     flag = false;
+    lastX  = -1;
+    lastY =  -1;
+    console.log('flag to false')
 }
 function handleClick() {
 
@@ -28,7 +33,7 @@ function handleClick() {
     container.onmousemove = _.throttle(function (e) {
         // console.log(e.clientX, e.clientY)
         x = e.clientX - position.left;
-        y = e.clientY;
+        y = e.clientY + document.body.scrollTop - position.top;
     }, 14);
     rasterizehtml.drawDocument(document, canvas, {
         executeJs: true,
@@ -37,7 +42,11 @@ function handleClick() {
         console.log(res);
     })
     function test() {
-        draw(x, y);
+        if (lastX !== -1 ) {
+            draw(x, y);
+        }
+        lastX = x;
+        lastY = y;
         // if (x >= 700 || y >= 500)
         //     return;
         // x += 5;
@@ -54,11 +63,26 @@ window.requestAnimationFrame(_ => {
 })
 function draw(x, y) {
 
+    if (!flag)
+        return;
     // ctx.fillStyle='#000';
     ctx.fillStyle = "rgb(200,0,0)";
-    //console.log(x, y, 'draw');
-    if (flag)
-    ctx.fillRect(x, y, 5, 5);
+    ctx.beginPath()
+    ctx.moveTo(lastX, lastY) 
+    ctx.lineTo(x, y)
+    if(Math.abs(lastY - y) < lineWidth) {
+        ctx.lineTo(x, y + lineWidth)
+        ctx.lineTo(lastX, lastY + lineWidth)
+    } else {
+    ctx.lineTo(x + lineWidth, y)
+    ctx.lineTo(lastX + lineWidth, lastY)
+    }
+    ctx.lineTo(lastX, lastY)
+    ctx.fill()
+    ctx.closePath()
+    //console.log(x, y, 'draOw');
+    // if (flag)
+    // ctx.fillRect(x, y, 5, 5);
 }
 export default class Issues extends Component {
     constructor(props) {
@@ -67,8 +91,13 @@ export default class Issues extends Component {
     }
     render() {
         return (
+            <div>
             <div onClick={handleClick}>
                 test
+            </div>
+            <div onClick={this.upload}>
+                upload
+            </div>
             </div>
         )
     }
@@ -78,6 +107,7 @@ export default class Issues extends Component {
         canvas.height = 500;
         canvas.onmouseover = _ => {
             console.log('enter')
+            flag && (flag = false)
             inner = true;
             if (keydown === false) {
 
@@ -104,9 +134,14 @@ export default class Issues extends Component {
 
             }
             else {
+                keydown = false;
                 removeListener()
             }
         }
+    }
+    upload () {
+        let data = canvas.toDataURL();
+        console.log(data);
     }
 
 }
