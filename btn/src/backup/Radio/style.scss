@@ -1,0 +1,97 @@
+.radio_container {
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border: 1px solid #bedaf9;
+    overflow: hidden;
+    .radio_header_base {
+        display: inline-block;
+        height: 100%;
+        width: 50px;
+        min-height: 50px;
+        vertical-align: top;
+        >input {
+            display: none;
+        }
+        margin-bottom: -1000px;
+        padding-bottom: 1000px;
+    }
+    // .radio_header_base::before {
+    //     content: '';
+    //     vertical-align: middle;
+    //     height: 100%;
+    //     display: inline-block;
+    // }
+    // .radio_header::before {
+    //     content: '';
+    //     vertical-align: middle;
+    //     height: 100%;
+    //     display: inline-block;
+    // }
+    .radio_header {
+        @extend .radio_header_base;
+        background-color: #bedaf9;
+    }
+    .radio_header_checked {
+        @extend .radio_header_base;
+        background-color: #2783eb;
+        overflow: hidden;
+    }
+    .radio_checked {
+        display: inline-block;
+        background-color: white;
+        width: 15px;
+        height: 20px;
+        border-bottom-right-radius: 1px;
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translate(0, -70%) rotate(40deg);
+        > .mask {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: -3px;
+            top: -3px;
+            background-color: #2783eb;
+        }
+    } 
+    .radio_label_base {
+        display: inline-block;
+        line-height: 1.4em;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+    .radio_label {
+        @extend .radio_label_base;
+        visibility: hidden;
+        // display: none;
+        margin-bottom: -1000px;
+        padding-bottom: 1000px;
+        padding-top: 20px;
+        // position: relative;
+
+    }
+    .radio_label_show {
+        @extend .radio_label_base;
+        // display: none;
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 40px;
+        transform: translate(0, -50%);
+        width: 100%;
+    }
+    .radio_label:hover {
+        background-color: #ebf4fd;
+    }
+}
+
+.radio_container_checked {
+    border: 1px solid #2783eb !important;
+}
+
+.radio_container:hover {
+    background-color: #ebf4fd;
+}

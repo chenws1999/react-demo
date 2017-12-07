@@ -55,7 +55,7 @@ class App extends Component {
       value: "",
       disabled: false,
       once: false,
-      width: '10%'
+      width: '20%'
     }
     this.handleCheck = this.handleCheck.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -79,7 +79,6 @@ class App extends Component {
     console.log(value);
     this.setState({
       value: value,
-      width: '40%'
       
     });
   }
@@ -162,7 +161,23 @@ class App extends Component {
               <RadioGroup style={{width: this.state.width}}value={this.state.value} onChange={this.handleChange} defaultValue="test2" layout="">
               {radios}
          </RadioGroup>
-         <div className="flext">
+   
+           <div id="wrap">
+              <div id="left">
+              <p>style="height:50px"</p>
+              <p>style="height:50px"</p>
+                  {/* <p style={{height:'50px'}}>style="height:50px"</p> */}
+              </div>
+              <div id="center">
+              <p>style="height:50px"</p>
+                  {/* <p style={{height:'100px'}}>style="height:100px"</p> */}
+              </div>
+              <div id="right">
+              <p>style="height:50px"</p>
+                  {/* <p style={{height:'200px'}}>style="height:200px"</p> */}
+              </div>
+          </div>
+          <div className="flext">
               <span>sdfasdfasdfasfasdffasdfas</span>
            </div>
       </div>

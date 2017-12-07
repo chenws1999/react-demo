@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import bind from 'classnames';
-import './style.css';
+// import './style.css';
+import Style from './style.scss';
 let childs
 export class RadioGroup extends Component {
     static defaultProps = {
@@ -20,7 +21,7 @@ export class RadioGroup extends Component {
             labelWidth: 0
         };
         this.handleOnchange = this.handleOnchange.bind(this);
-        this.handleRef = this.handleRef.bind(this);
+        this.handleChildRef = this.handleChildRef.bind(this);
         this.handleLabelRef = this.handleLabelRef.bind(this);
         this.handleParentRef = this.handleParentRef.bind(this);
     }
@@ -35,9 +36,9 @@ export class RadioGroup extends Component {
                 value: nextProps.value
             })
     }
-    handleOnchange (e) {
-        if (e.target.value !== this.state.value) {
-            this.props.onChange(e, e.target.value);
+    handleOnchange (e, value) {
+        if (value !== this.state.value) {
+            this.props.onChange(e, value);
         }
     }
     handleParentRef (e) {
@@ -50,14 +51,14 @@ export class RadioGroup extends Component {
         //     return;
         // }
         if (!this.state.isFirstRender) {
-            if (e && e.clientWidth !== this.clientWidth) {
-                isFirstRender: true
-            }
-            this.clientWidth = e.clientWidth;
+            // if (e && e.clientWidth !== this.clientWidth) {
+            //     isFirstRender: true
+            // }
+            // this.clientWidth = e.clientWidth;
             return;
         }
-        console.log(e.clientWidth, this.childWidth)
-        this.clientWidth = e.clientWidth;
+        console.log('allwidth', e.clientWidth, this.childWidth, this.childLabelWidth)
+        this.parentWidth = e.clientWidth;
         this.parentNode = e;
         this.setState({
             isFirstRender: false,
@@ -65,7 +66,7 @@ export class RadioGroup extends Component {
             labelWidth: e.clientWidth > this.childWidth ? this.childLabelWidth : Math.floor(this.childLabelWidth - this.childWidth + e.clientWidth)
         })
     }
-    handleRef (element) {
+    handleChildRef (element) {
         console.log('child ref', element)
         if (!this.state.isFirstRender)
             return;
@@ -76,7 +77,7 @@ export class RadioGroup extends Component {
         console.log('label ref', ele)
         if (!this.state.isFirstRender)
             return;
-        console.log('label ref', ele);
+        console.log('label ref', ele, ele.scrollWidth);
         this.childLabelWidth = ele.scrollWidth;
     }
     firstRender () {
@@ -91,7 +92,7 @@ export class RadioGroup extends Component {
         })
         console.log(maxLengthChild, 'max-child')
         return React.cloneElement(maxLengthChild, {
-            childRef: this.handleRef,
+            childRef: this.handleChildRef,
             labelRef: this.handleLabelRef,
             key: maxLengthChild.props.key || maxLengthChild.props.value
         });
@@ -100,7 +101,14 @@ export class RadioGroup extends Component {
        let childs;
         if (this.state.isFirstRender)
             childs = this.firstRender();
-        else
+        else {
+            let labelStyle = {
+                width: this.state.labelWidth
+            }
+            // if (this.parentWidth >= this.childWidth ) {
+            //     labelStyle.verticalAlign = 'top',
+            //     labelStyle.lineHeight = '50px'
+            // }
             childs = React.Children.map(this.props.children, item => {
                 let replaceProps = {name: this.props.name};
                     replaceProps.onClick = this.handleOnchange;
@@ -108,9 +116,7 @@ export class RadioGroup extends Component {
                     replaceProps.style = Object.assign({}, item.props.style, {
                         width: this.state.eleWidth
                     })
-                    replaceProps.labelStyle = Object.assign({}, item.props.labelStyle, {
-                        width: this.state.labelWidth 
-                    })
+                    replaceProps.labelStyle = Object.assign({}, item.props.labelStyle, labelStyle)
                 if (item.props.value !== this.state.value) {
                     replaceProps.defaultChecked = false;
                     replaceProps.checked = false;
@@ -120,8 +126,9 @@ export class RadioGroup extends Component {
                 }
                 return React.cloneElement(item, replaceProps)
             });
+        }
         return (
-            <div ref={this.handleParentRef} style={this.props.style} className={bind('RadioGroup', this.props.layout === 'vertical' ? 'RadioGroup-vertical' : 'RadioGroup-level')}>
+            <div ref={this.state.isFirstRender && this.handleParentRef} style={this.props.style} className={bind('RadioGroup', this.props.layout === 'vertical' ? 'RadioGroup-vertical' : 'RadioGroup-level')}>
                 {childs}
             </div>
         )
@@ -157,18 +164,30 @@ export default class Radio extends Component {
     handleonClick (e) {
         if (this.state.disabled)
             return;
-        this.props.onClick(e);
+        this.props.onClick(e, this.props.value);
     }
     render () {
-        let classname = bind('Radio', this.state.checked && 'Radio-checked',  this.props.disabled && 'Radio-disabled'),
+        let classname = bind(Style.radio_container, this.state.checked && Style.radio_container_checked),
+            headerClass = bind(this.state.checked ? Style.radio_header_checked : Style.radio_header),
             randomId = Math.random().toString(36).substr(2);
         return (
-            <span className="Radio-container" ref={this.props.childRef} style={this.props.style}>
-                <label className={classname}>
-                    <input id={randomId} type="radio" value={this.props.value} onClick={this.handleonClick} name={this.props.name}/>
-                </label>
-                    <label className="label" ref={this.props.labelRef} style={this.props.labelStyle}  htmlFor={randomId}>{this.props.label}</label>
-            </span>
+            <div className={classname} ref={this.props.childRef} style={this.props.style} onClick={this.handleonClick}>
+                    <div className={headerClass}>
+
+                        <input id={randomId} type="radio" value={this.props.value} name={this.props.name}/>
+                    </div>
+                    <div className={Style.radio_label} ref={this.props.labelRef} style={this.props.labelStyle}  htmlFor={randomId}>
+                    {this.props.label}
+
+                    </div>
+                    <div className={Style.radio_label_show} style={this.props.labelStyle}>
+                    {this.props.label}
+                    </div>
+                    {this.state.checked && <div className={Style.radio_checked}>
+                            <div className={Style.mask}>
+                            </div>
+                    </div>}
+            </div>
         )
     }
 }

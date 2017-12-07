@@ -52,3 +52,28 @@
 .flext > span {
   word-wrap: break-word;
 }
+
+#wrap{
+  overflow:hidden;
+  width:580px;
+  margin:0 auto;
+}
+#left,#center,#right{
+  /* margin-bottom:-100px; */
+  /* padding-bottom:100px; */
+}
+#left {
+  float:left;
+  width:140px;
+  background:#777;
+}
+#center {
+  float:left;
+  width:300px;
+  background:#888;
+}
+#right {
+  float:right;
+  width:140px;
+  background:#999;
+}
