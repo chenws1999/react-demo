@@ -1,15 +1,27 @@
-.radio_container {
+// checked-item 代指 单选 和 多选 项
+$checked_item_header_side_length: 50px;
+$checked_item_checked_width: 15px;
+$checked_item_checked_height: 20px;
+
+.checked_item_group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    border: 1px solid red;
+}
+.checked_item_container {
+    flex-shrink: 0;
     display: inline-block;
     position: relative;
     white-space: nowrap;
-    box-sizing: border-box;
+    // box-sizing: border-box;
     border: 1px solid #bedaf9;
     overflow: hidden;
-    .radio_header_base {
+    cursor: pointer;
+    .checked_item_header_base {
         display: inline-block;
-        height: 100%;
-        width: 50px;
-        min-height: 50px;
+        width: $checked_item_header_side_length;
+        min-height: $checked_item_header_side_length;
         vertical-align: top;
         >input {
             display: none;
@@ -17,32 +29,20 @@
         margin-bottom: -1000px;
         padding-bottom: 1000px;
     }
-    // .radio_header_base::before {
-    //     content: '';
-    //     vertical-align: middle;
-    //     height: 100%;
-    //     display: inline-block;
-    // }
-    // .radio_header::before {
-    //     content: '';
-    //     vertical-align: middle;
-    //     height: 100%;
-    //     display: inline-block;
-    // }
-    .radio_header {
-        @extend .radio_header_base;
+    .checked_item_header {
+        @extend .checked_item_header_base;
         background-color: #bedaf9;
     }
-    .radio_header_checked {
-        @extend .radio_header_base;
+    .checked_item_header_checked {
+        @extend .checked_item_header_base;
         background-color: #2783eb;
         overflow: hidden;
     }
-    .radio_checked {
+    .checked_item_checked {
         display: inline-block;
         background-color: white;
-        width: 15px;
-        height: 20px;
+        width: $checked_item_checked_width;
+        height: $checked_item_checked_height;
         border-bottom-right-radius: 1px;
         position: absolute;
         left: 14px;
@@ -57,41 +57,43 @@
             background-color: #2783eb;
         }
     } 
-    .radio_label_base {
-        display: inline-block;
+    .checked_item_label_base {
+        font-size: 16px;
         line-height: 1.4em;
         word-wrap: break-word;
+        word-break: break-all;
         white-space: normal;
     }
-    .radio_label {
-        @extend .radio_label_base;
+    .checked_item_label_init {
+        @extend .checked_item_label_base;
+        white-space: nowrap;
+    }
+    .checked_item_label {
+        @extend .checked_item_label_base;
+        display: inline-block;
         visibility: hidden;
-        // display: none;
         margin-bottom: -1000px;
         padding-bottom: 1000px;
         padding-top: 20px;
-        // position: relative;
-
     }
-    .radio_label_show {
-        @extend .radio_label_base;
-        // display: none;
-        display: inline-block;
+    .checked_item_label_show {
+        @extend .checked_item_label_base;
         position: absolute;
         top: 50%;
-        left: 40px;
+        left: $checked_item_header_side_length;
         transform: translate(0, -50%);
         width: 100%;
+        z-index: 100;
     }
-    .radio_label:hover {
+    .checked_item_label:hover {
         background-color: #ebf4fd;
     }
 }
 
-.radio_container_checked {
+.checked_item_container_checked {
     border: 1px solid #2783eb !important;
 }
 
-.radio_container:hover {
+.checked_item_container:hover {
     background-color: #ebf4fd;
 }

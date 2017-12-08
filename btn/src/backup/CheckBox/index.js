@@ -19,7 +19,7 @@ function CheckBox ({label, checked, disabled = false, value="", onChange = () =>
     function handleChange (e) {
         if (disabled)
             return;
-        onChange(e);
+        onChange(value, e);
     }
     return (
     <span className="checkbox-container">
@@ -52,49 +52,33 @@ class CheckBoxGroup extends Component {
         super(props);
         this.state= {
         }
-        this.checked = [];  // init 
-        this.checkedValue = []
-        this.children = React.Children.map(this.props.children, (item, index) => {
+        this.checked = new Map();
+        React.Children.forEach(this.props.children, (item, index) => {
             if (item.props.checked) {
-                this.checked[index] = true;
-                this.checkedValue.push(item.props.value);
+                this.checked.set(index, item);
             }
-            return item.props.value;
         });
         this.handleChange = this.handleChange.bind(this);
         this.checkAll = this.checkAll.bind(this);
         this.clearAll = this.clearAll.bind(this);
     }
-    handleChange (index, e) {
-        if (this.checked[index]) // 如果原本为选中，现在将要变为非选中
-            this.checkedValue.forEach((item, index2) => {
-                if (item === this.children[index])
-                    this.checkedValue.splice(index2, 1);
-            })
-        else
-            this.checkedValue.push(this.children[index]);
-        this.checked[index] = !this.checked[index];
-        console.log(this.checkedValue);
-        this.props.onChange(this.checkedValue); //返回的参数为变被选中的所有值
+    handleChange (index, value, e) {
+        this.checked.has(index) ? this.checked.delete(index) : this.checked.set(index, value);
+        let [...checkedValues] = this.checked.values();
+        this.props.onChange(checkedValues, this.checked);
         this.forceUpdate();
     }
     clearAll () {
-        console.log('clear all')
-        if (this.checkedValue.length === 0)
+        if (this.checked.size === 0)
             return;
-        this.children.forEach((item, index) => {
-            this.checked[index] = false;
-        })
-        this.checkedValue = [];
+        this.checked.clear();
         this.forceUpdate();
     }
     checkAll () {
-        if (this.checkedValue.length === this.children.length)
+        if (this.checked.size === [].concat(this.props.children).length)
             return;
-        this.checkedValue = [];
-        this.children.forEach((item, index) => {
-            this.checked[index] = true;
-            this.checkedValue.push(item);
+        React.Children.forEach(this.props.children, (item, index) => {
+            !this.checked.has(index) && this.checked.set(index, item.props.value);
         })
         this.forceUpdate();
     }
@@ -111,17 +95,18 @@ class CheckBoxGroup extends Component {
                 }
             } else {
                 propsReplaced = {
-                    checked: this.checked[index] === true,
-                    onChange: _ => this.handleChange(index),
+                    checked: this.checked.has(index),
+                    onChange: this.handleChange.bind(null, index),
                 }
             }
             return React.cloneElement(item, propsReplaced);
         })
+        let childrenSize = [].concat(this.props.children).length 
         return (
             <div>                                                  
                 {childs}
-                <CheckBox label="选中所有" disabled={this.checkedValue.length === this.children.length} checked={this.checkedValue.length === this.children.length} onChange={this.checkAll}/>
-                <CheckBox label="取消所有选择" disabled={this.checkedValue.length === 0} checked={this.checkedValue.length === 0} onChange={this.clearAll}/>
+                <CheckBox label="选中所有" disabled={this.checked.size === childrenSize} checked={this.checked.size === childrenSize} onChange={this.checkAll}/>
+                <CheckBox label="取消所有选择" disabled={this.checked.size === 0} checked={this.checked.size === 0} onChange={this.clearAll}/>
             </div>
         )
     }

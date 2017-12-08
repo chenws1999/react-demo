@@ -5,7 +5,7 @@ import './App.css';
 // import Button from './component/Btn2/Button';
 // import './test.css';
 // import BtnTabs from './component/BtnTabs/BtnTabs';
-// import Checkbox, { CheckBoxGroup } from './component/CheckBox/index';
+import Checkbox, { CheckBoxGroup } from './backup/CheckBox/index';
 // import Input from './component/Input/Input';
 // import LoadMore from './LoadMore/LoadMore';
 // import CountBtnInput from './component/CountBtnInput/CountBtnInput'
@@ -33,7 +33,9 @@ function click() {
 }
 
 let labels = [
-  'lllllllllllllllllllllllllllllllllllllllllllll',
+  // '123456789 123456789 123456789 123456789 ',
+  'llllllllllllllllllllllllllllllllllllllllllllllllllllllllllll',
+  '汉子汉子汉字汉字汉子汉子汉字汉字汉子汉子汉字汉字汉子汉子汉字汉字汉子汉子汉字汉字',
   'sssssssssssssss',
   'teswss',
   'llllllllllllllllllllllllllllll',
@@ -55,7 +57,7 @@ class App extends Component {
       value: "",
       disabled: false,
       once: false,
-      width: '20%'
+      width: '40%'
     }
     this.handleCheck = this.handleCheck.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -161,7 +163,14 @@ class App extends Component {
               <RadioGroup style={{width: this.state.width}}value={this.state.value} onChange={this.handleChange} defaultValue="test2" layout="">
               {radios}
          </RadioGroup>
-   
+            <CheckBoxGroup>
+           <Checkbox value="sss" onChange={this.handleCheck} label="ttest" checked={true} />
+           <Checkbox value="test2" onChange={this.handleCheck} label="success" checked={false} />
+         </CheckBoxGroup>
+          <div>
+            <span>testtttt</span>
+            <span></span>
+          </div>
            <div id="wrap">
               <div id="left">
               <p>style="height:50px"</p>
