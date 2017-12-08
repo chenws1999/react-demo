@@ -3,8 +3,85 @@ import bind from 'classnames';
 // import './style.css';
 import Style from './style.scss';
 import _ from 'lodash';
+import Checkbox, {CheckBoxGroup} from '../CheckBox/';
 
-let childs
+export class CheckContainer extends Component { //将一些逻辑处理包裹在 多选、单选按钮组 外面的容器代理组件
+    constructor (props) {
+        super(props);
+        this.handleParentRef = this.handleParentRef.bind(this);
+        this.state = {
+            isFirstRender: true,
+            eleWidth: null,
+            labelWidth: null,
+        }
+    }
+    render () {
+        let childs,
+            labelStyle = {
+                width: this.state.labelWidth
+            }
+        childs = React.Children.map(this.props.children, item => {
+                let replaceProps = {};
+                    replaceProps.style = Object.assign({}, item.props.style, {
+                        width: this.state.eleWidth
+                    })
+                    replaceProps.labelStyle = Object.assign({}, item.props.labelStyle,{
+                        width: this.state.labelWidth
+                    })
+                return React.cloneElement(item, replaceProps)
+            });
+        let props = {
+            type: this.props.type,
+            handleParentRef: this.state.isFirstRender && this.handleParentRef,
+            ...Object.assign({}, this.props, {
+                children: childs
+            })
+        }
+        return   this.props.type && this.props.type === 'checkbox' ?
+                <CheckBoxGroup {...props} /> :
+                <RadioGroup {...props}/>
+        
+    }
+    componentDidMount () {
+        window.onresize = _.debounce(_ => {
+            console.log('resize');
+            requestAnimationFrame(_ => {
+                this.setState({
+                    isFirstRender: true,
+                    eleWidth: null,
+                    labelWidth: null
+                });
+            })
+        }, 500);
+    }
+    handleParentRef (e) {
+        console.log('parent ref', e)
+        if (!this.state.isFirstRender) {
+            return;
+        }
+        console.log(Style.checked_item_group)
+        let childs = document.querySelectorAll(`.${Style.checked_item_container}`),
+            labels = document.querySelectorAll(`.${Style.checked_item_label}`),
+            maxChildLength = 0,
+            maxLabelLength = 0
+        childs.forEach((item, index) => {
+            if (item.clientWidth >  maxChildLength)
+                maxChildLength = item.clientWidth;
+        })
+        labels.forEach((item, index) => {
+            if (item.clientWidth > maxLabelLength)
+                maxLabelLength = item.clientWidth;
+        })
+        console.log('allwidth',childs, labels, maxChildLength, maxLabelLength)
+        maxLabelLength += 4;
+        maxChildLength += 4;
+        this.setState({
+            isFirstRender: false,
+            eleWidth: e.clientWidth > maxChildLength ? maxChildLength : e.clientWidth,
+            labelWidth: e.clientWidth > maxChildLength ? maxLabelLength : maxLabelLength - maxChildLength + e.clientWidth
+        })
+    }
+}
 export class RadioGroup extends Component {
     static defaultProps = {
         defaultValue: '',
@@ -23,22 +100,9 @@ export class RadioGroup extends Component {
             labelWidth: 0
         };
         this.handleOnchange = this.handleOnchange.bind(this);
-        this.handleChildRef = this.handleChildRef.bind(this);
-        this.handleLabelRef = this.handleLabelRef.bind(this);
-        this.handleParentRef = this.handleParentRef.bind(this);
     }
-    componentDidMount () {
-        window.onresize = _.debounce(_ => {
-            console.log('resize');
-            // this.handlePageResize();
-            requestAnimationFrame(_ => {
-                this.setState({
-                    isFirstRender: true
-                });
-            })
-        }, 500);
-    }
-    componentDidUpdate () {
+
+    componentWillReceiveProps () {
     }
     componentWillReceiveProps (nextProps) {
         if (this.state.value !== nextProps.value);
@@ -46,80 +110,18 @@ export class RadioGroup extends Component {
                 value: nextProps.value
             })
     }
-    handlePageResize () {
-        // let parentWidth = this.parentNode.eleWidth;
-        // this.setState({
-        //     eleWidth: 
-        // })
-    }
-    handleOnchange (e, value) {
+    handleOnchange (value, e) {
         if (value !== this.state.value) {
             this.props.onChange(e, value);
         }
     }
-    handleParentRef (e) {
-        console.log('parent ref', e)
-        if (!this.state.isFirstRender) {
-            this.parentNode = e;
-            return;
-        }
-        console.log('allwidth', e.clientWidth, this.childWidth, this.childLabelWidth)
-        this.parentWidth = e.clientWidth;
-        this.parentNode = e;
-        this.setState({
-            isFirstRender: false,
-            eleWidth: e.clientWidth > this.childWidth ? this.childWidth : e.clientWidth,
-            labelWidth: e.clientWidth > this.childWidth ? this.childLabelWidth : Math.floor(this.childLabelWidth - this.childWidth + e.clientWidth)
-        })
-    }
-    handleChildRef (element) {
-        console.log('child ref', element)
-        if (!this.state.isFirstRender)
-            return;
-            console.log('child', element.scrollWidth, element.clientWidth)
-        this.childWidth = element.scrollWidth + 1;
-    }
-    handleLabelRef (ele) {
-        console.log('label ref', ele)
-        if (!this.state.isFirstRender)
-            return;
-        console.log('label ref', ele, ele.scrollWidth);
-        this.childLabelWidth = ele.scrollWidth;
-    }
-    firstRender () {
-        let maxLengthChild = '',
-            label = ''
-        React.Children.forEach(this.props.children, item => {
-            if (item.props.label.length >= label.length) {
-                maxLengthChild = item
-                label = item.props.label;
-            }
-            console.log(item)
-        })
-        console.log(maxLengthChild, 'max-child')
-        return React.cloneElement(maxLengthChild, {
-            childRef: this.handleChildRef,
-            labelRef: this.handleLabelRef,
-            key: maxLengthChild.props.key || maxLengthChild.props.value
-        });
-    }
+
     render () {
-       let childs;
-        if (this.state.isFirstRender)
-            childs = this.firstRender();
-        else {
-            let labelStyle = {
-                width: this.state.labelWidth
-            }
-            childs = React.Children.map(this.props.children, item => {
-                let replaceProps = {name: this.props.name};
-                    replaceProps.onClick = this.handleOnchange;
-                    replaceProps.key = item.props.key || item.props.value;
-                    replaceProps.style = Object.assign({}, item.props.style, {
-                        width: this.state.eleWidth
-                    })
-                    replaceProps.labelStyle = Object.assign({}, item.props.labelStyle, labelStyle)
-                if (item.props.value !== this.state.value) {
+        let   childs = React.Children.map(this.props.children, item => {
+                let  replaceProps = {name: this.props.name}
+                    replaceProps.onClick = this.handleOnchange
+                    replaceProps.key = item.props.key || item.props.value
+                if (item.props.value !== this.props.value) {
                     replaceProps.defaultChecked = false;
                     replaceProps.checked = false;
                 } else {
@@ -128,9 +130,8 @@ export class RadioGroup extends Component {
                 }
                 return React.cloneElement(item, replaceProps)
             });
-        }
         return (
-            <div ref={this.state.isFirstRender && this.handleParentRef} style={this.props.style} className={Style.checked_item_group}>
+            <div ref={this.props.handleParentRef} style={this.props.style} className={Style.checked_item_group}>
                 {childs}
             </div>
         )
@@ -139,7 +140,7 @@ export class RadioGroup extends Component {
 
 
 
-export default class Radio extends Component {
+export default class CheckItem extends Component {
     static defaultProps = {
         label: "", 
         value: "",
@@ -154,26 +155,26 @@ export default class Radio extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            checked: this.props.defaultChecked
+            checked: this.props.defaultChecked || this.props.checked
         };
-        this.handleonClick = this.handleonClick.bind(this);
+        this.handleOnClick = this.handleOnClick.bind(this);
     }
     componentWillReceiveProps (nextProps) {
         this.setState({
             checked: nextProps.checked
         });
     }
-    handleonClick (e) {
+    handleOnClick (e) {
         if (this.state.disabled)
             return;
-        this.props.onClick(e, this.props.value);
+        this.props.onClick(this.props.value, e);
     }
     render () {
         let radioClass = bind(Style.checked_item_container, this.state.checked && Style.checked_item_container_checked),
             headerClass = bind(this.state.checked ? Style.checked_item_header_checked : Style.checked_item_header),
             labelClass = bind(Style.checked_item_label)
         return (
-            <div className={radioClass} ref={this.props.childRef} style={this.props.style} onClick={this.handleonClick}>
+            <div className={radioClass} ref={this.props.childRef} style={this.props.style} onClick={this.handleOnClick}>
                     <div className={headerClass}>
                         <input  type="radio" value={this.props.value} name={this.props.name}/>
                     </div>

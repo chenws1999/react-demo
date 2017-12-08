@@ -5,7 +5,6 @@ import './App.css';
 // import Button from './component/Btn2/Button';
 // import './test.css';
 // import BtnTabs from './component/BtnTabs/BtnTabs';
-import Checkbox, { CheckBoxGroup } from './backup/CheckBox/index';
 // import Input from './component/Input/Input';
 // import LoadMore from './LoadMore/LoadMore';
 // import CountBtnInput from './component/CountBtnInput/CountBtnInput'
@@ -15,11 +14,14 @@ import Checkbox, { CheckBoxGroup } from './backup/CheckBox/index';
 // import Menu from './component/Select/Menu';
 // import Select from './component/Select/Select';
 // import Options from './component/Select/Option'
-import Radio, { RadioGroup } from './backup/Radio/index';
+// import Checkbox, { CheckBoxGroup } from './backup/CheckBox/index';
+
+// import CheckItem, { RadioGroup, CheckContainer } from './backup/Radio/index';
 // import Button from './backup/Btn2/Button';
 // import AcceptBtn, { AcceptBtnItem } from './acceptBtn/index';
 
 // import IssuesUpload from './issues';
+import CheckItem, {CheckContainer} from './backup/check-radio/checkContainer'
 function res() {
   return new Promise(res => {
     setTimeout(_ => {
@@ -27,7 +29,9 @@ function res() {
     }, 11000);
   });
 }
-
+function validateBorder (e) {
+  console.log(e.target.scrollWidth);
+}
 function click() {
   console.log('click');
 }
@@ -35,7 +39,7 @@ function click() {
 let labels = [
   // '123456789 123456789 123456789 123456789 ',
   'llllllllllllllllllllllllllllllllllllllllllllllllllllllllllll',
-  '汉子汉子汉字汉字汉子汉子汉字汉字汉子汉子汉字汉字汉子汉子汉字汉字汉子汉子汉字汉字',
+  '汉子汉子汉字汉字汉子汉子汉字汉字汉子汉子汉字汉字e',
   'sssssssssssssss',
   'teswss',
   'llllllllllllllllllllllllllllll',
@@ -43,11 +47,15 @@ let labels = [
   'sdfsadfsdf'
 ];
 
-let radios = []
+let radios = [],
+    checks = []
 labels.forEach(item => {
   radios.push((
-        <Radio label={item} style={{ color: '#5588ee' }} defaultChecked value={item} />
+        <CheckItem label={item} style={{ color: '#5588ee' }} defaultChecked value={item} />
   ))
+  checks.push(
+    <CheckItem value={item}  label={item} checked={false}/>
+  )
 })
 class App extends Component {
   constructor() {
@@ -57,7 +65,7 @@ class App extends Component {
       value: "",
       disabled: false,
       once: false,
-      width: '40%'
+      width: '100%'
     }
     this.handleCheck = this.handleCheck.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -78,7 +86,7 @@ class App extends Component {
     })
   }
   handleChange(e, value) {
-    console.log(value);
+    // console.log('outter', value);
     this.setState({
       value: value,
       
@@ -160,16 +168,19 @@ class App extends Component {
       //   </p>
       // </div>
       <div className="App">
-              <RadioGroup style={{width: this.state.width}}value={this.state.value} onChange={this.handleChange} defaultValue="test2" layout="">
+              {/* <CheckContainer style={{width: this.state.width}} value={this.state.value} onChange={this.handleChange} defaultValue="test2" layout="">
               {radios}
-         </RadioGroup>
-            <CheckBoxGroup>
-           <Checkbox value="sss" onChange={this.handleCheck} label="ttest" checked={true} />
-           <Checkbox value="test2" onChange={this.handleCheck} label="success" checked={false} />
-         </CheckBoxGroup>
-          <div>
-            <span>testtttt</span>
-            <span></span>
+         </CheckContainer> */}
+          <CheckContainer type="checkbox" onChange={this.handleCheck} style={{width: this.state.width}}>
+            <CheckItem value="ttest"  label="ttest" checked={true}/>
+            <CheckItem value="success" label="success" checked={false} />
+            {checks}
+         </CheckContainer>
+         {/* <CheckBoxGroup type="checkbox" onChange={this.handleCheck}>
+            <Checkbox value="ttest"  label="ttest" checked={true}/>
+            <Checkbox value="success" label="success" checked={false} />
+         </CheckBoxGroup> */}
+          <div id="test" onClick={validateBorder}>
           </div>
            <div id="wrap">
               <div id="left">

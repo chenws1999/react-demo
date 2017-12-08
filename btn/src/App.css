@@ -77,3 +77,10 @@
   width:140px;
   background:#999;
 }
+
+#test {
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  box-sizing: border-box;
+}

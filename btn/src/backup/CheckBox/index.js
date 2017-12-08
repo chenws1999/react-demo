@@ -12,14 +12,15 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import bind from 'classnames';
 import './style.css'
+import Style from '../Radio/style.scss';
 
 
-function CheckBox ({label, checked, disabled = false, value="", onChange = () => null}, style={}) {
+function CheckBox ({label, checked, disabled = false, value="", onClick = () => null}, style={}) {
     let randomId = Math.random().toString(36).substr(2);
     function handleChange (e) {
         if (disabled)
             return;
-        onChange(value, e);
+        onClick(value, e);
     }
     return (
     <span className="checkbox-container">
@@ -55,7 +56,7 @@ class CheckBoxGroup extends Component {
         this.checked = new Map();
         React.Children.forEach(this.props.children, (item, index) => {
             if (item.props.checked) {
-                this.checked.set(index, item);
+                this.checked.set(index, item.props.value);
             }
         });
         this.handleChange = this.handleChange.bind(this);
@@ -63,9 +64,11 @@ class CheckBoxGroup extends Component {
         this.clearAll = this.clearAll.bind(this);
     }
     handleChange (index, value, e) {
+        // console.log(index, value, e, 'checkbox')
         this.checked.has(index) ? this.checked.delete(index) : this.checked.set(index, value);
         let [...checkedValues] = this.checked.values();
         this.props.onChange(checkedValues, this.checked);
+        // console.log('checkbox', this.checked, checkedValues);
         this.forceUpdate();
     }
     clearAll () {
@@ -84,29 +87,19 @@ class CheckBoxGroup extends Component {
     }
     render () {
         let childs = React.Children.map(this.props.children, (item, index) => {
-            let propsReplaced = {}
-            if (this.state.isAllChecked) {
-                propsReplaced = {
-                    checked: !item.props.disabled && true
-                }
-            } else if (this.state.isAllClear) {
-                propsReplaced = {
-                    checked: !item.props.disabled && false
-                }
-            } else {
-                propsReplaced = {
+            // console.log('checkbox foreach', this.checked, this.checked.has(index));
+            let propsReplaced = {
                     checked: this.checked.has(index),
-                    onChange: this.handleChange.bind(null, index),
+                    onClick: this.handleChange.bind(null, index),
                 }
-            }
             return React.cloneElement(item, propsReplaced);
         })
         let childrenSize = [].concat(this.props.children).length 
         return (
-            <div>                                                  
+            <div ref={this.props.handleParentRef} style={this.props.style} className={Style.checked_item_group}>                                                  
                 {childs}
-                <CheckBox label="选中所有" disabled={this.checked.size === childrenSize} checked={this.checked.size === childrenSize} onChange={this.checkAll}/>
-                <CheckBox label="取消所有选择" disabled={this.checked.size === 0} checked={this.checked.size === 0} onChange={this.clearAll}/>
+                {/* <CheckBox label="选中所有" disabled={this.checked.size === childrenSize} checked={this.checked.size === childrenSize} onChange={this.checkAll}/>
+                <CheckBox label="取消所有选择" disabled={this.checked.size === 0} checked={this.checked.size === 0} onChange={this.clearAll}/> */}
             </div>
         )
     }
