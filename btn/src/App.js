@@ -65,7 +65,8 @@ class App extends Component {
       value: "",
       disabled: false,
       once: false,
-      width: '100%'
+      width: '60%',
+      show: true
     }
     this.handleCheck = this.handleCheck.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -168,14 +169,23 @@ class App extends Component {
       //   </p>
       // </div>
       <div className="App">
-              {/* <CheckContainer style={{width: this.state.width}} value={this.state.value} onChange={this.handleChange} defaultValue="test2" layout="">
+        {this.state.show && 
+        <div>
+              <CheckContainer style={{width: this.state.width}} value={this.state.value} onChange={this.handleChange} defaultValue="test2" layout="">
               {radios}
-         </CheckContainer> */}
+         </CheckContainer>
           <CheckContainer type="checkbox" onChange={this.handleCheck} style={{width: this.state.width}}>
             <CheckItem value="ttest"  label="ttest" checked={true}/>
             <CheckItem value="success" label="success" checked={false} />
             {checks}
          </CheckContainer>
+         </div>
+        }
+          <div onClick={_ => {this.setState({
+              show: false
+            })}}>
+            click
+            </div>
          {/* <CheckBoxGroup type="checkbox" onChange={this.handleCheck}>
             <Checkbox value="ttest"  label="ttest" checked={true}/>
             <Checkbox value="success" label="success" checked={false} />

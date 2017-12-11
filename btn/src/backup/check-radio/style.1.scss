@@ -39,19 +39,16 @@ $checked_item_checked_height: 20px;
         background-color: #2783eb;
         overflow: hidden;
     }
-    .checked_item_char_show_base {
-        display: inline-block;
-        left: 14px;
-        top: 50%;
-        position: absolute;
-    }
     .checked_item_checked {
-        @extend .checked_item_char_show_base;
-        transform: translate(0, -70%) rotate(40deg); 
+        display: inline-block;
         background-color: white;
         width: $checked_item_checked_width;
         height: $checked_item_checked_height;
         border-bottom-right-radius: 1px;
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translate(0, -70%) rotate(40deg);
         > .mask {
             position: absolute;
             width: 100%;
@@ -60,14 +57,7 @@ $checked_item_checked_height: 20px;
             top: -3px;
             background-color: #2783eb;
         }
-    }
-    .checked_item_char {
-        @extend .checked_item_char_show_base;
-        transform: translate(0, -50%);
-        font-size: 18px;
-        font-weight: 900;
-        color: #2783eb;
-    }
+    } 
     .checked_item_label_base {
         font-size: 16px;
         line-height: 1.4em;
@@ -75,7 +65,6 @@ $checked_item_checked_height: 20px;
         word-break: break-all;
         white-space: normal;
         padding-left: 10px;
-        box-sizing: border-box;
     }
     .checked_item_label {
         @extend .checked_item_label_base;
